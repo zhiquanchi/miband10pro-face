@@ -1,0 +1,31 @@
+diff --git a/source/overlays/band10pro/hw/arm/miband_hci_gatt.c b/source/overlays/band10pro/hw/arm/miband_hci_gatt.c
+index f099d23..06b8beb 100644
+--- a/source/overlays/band10pro/hw/arm/miband_hci_gatt.c
++++ b/source/overlays/band10pro/hw/arm/miband_hci_gatt.c
+@@ -264,8 +264,25 @@ bool miband_hci_gatt_acl(MiBandHciGatt *gatt, const uint8_t *packet,
+         }
+         if (length == 2) goto not_found;
+         break;
+-    case 0x12: /* Write Request */
++    case 0x1d: /* Handle Value Indication.
++                *
++                * The band is the ATT *server* here: after a connection it
++                * pushes data up on its own characteristic (observed on handle
++                * 0x000c with payload 01 00 ff ff).  A server must get a
++                * Handle Value Confirmation back or every later indication on
++                * that link stalls, and this server used to fall through to the
++                * default arm and answer with an ATT Error.  Confirm, and hand
++                * the value to the same callback that carries the band's
++                * Xiaomi L1 frames. */
+         if (pdu_len < 3) goto invalid;
++        if (gatt->write_callback) {
++            gatt->write_callback(gatt, gatt->write_opaque,
++                                 lduw_le_p(pdu + 1), pdu + 3, pdu_len - 3,
++                                 false);
++        }
++        att[0] = 0x1e; length = 1;
++        break;
++    case 0x12: /* Write Request */        if (pdu_len < 3) goto invalid;
+         if (gatt->write_callback) {
+             gatt->write_callback(gatt, gatt->write_opaque,
+                                  lduw_le_p(pdu + 1), pdu + 3, pdu_len - 3,

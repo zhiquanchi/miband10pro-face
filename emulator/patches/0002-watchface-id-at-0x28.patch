@@ -1,0 +1,23 @@
+diff --git a/source/overlays/band10pro/hw/arm/miband_nand_device.c b/source/overlays/band10pro/hw/arm/miband_nand_device.c
+index ac8c22e..4104fb2 100644
+--- a/source/overlays/band10pro/hw/arm/miband_nand_device.c
++++ b/source/overlays/band10pro/hw/arm/miband_nand_device.c
+@@ -164,9 +164,15 @@ void miband_nand_set_mass_files(MiBandNandDevice *nand, unsigned first_page,
+          * /data/app/watchface/market/<id>/resource.bin.  Keep the generic
+          * MASS copy for diagnostics, and expose the same path so a later
+          * Bluetooth set-current request follows the firmware's normal lookup
+-         * path.  Xiaomi .bin packages store a 24-byte ID field at +0x22. */
+-        if (watchface_size >= 34) {
+-            const uint8_t *id = watchface + 34;
++         * path.  The package's 24-byte ASCII watchface id starts at +0x28:
++         * the factory /resource romfs entry
++         * watchface/aod/362150007/resource.bin carries "362150007" at offset
++         * 40, and our own packer writes its id at the same offset.  Reading
++         * +0x22 finds no printable run there, so market/<id>/ was never
++         * created and the firmware's watchface manager could not see an
++         * installed face. */
++        if (watchface_size >= 40 + 24) {
++            const uint8_t *id = watchface + 40;
+             unsigned count = 0;
+             while (count < 24 && id[count] >= 0x21 && id[count] <= 0x7e)
+                 count++;

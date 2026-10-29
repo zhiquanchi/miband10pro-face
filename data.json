@@ -1,0 +1,51 @@
+{
+  "snapshot_at": "2026-10-28T15:54:00+08:00",
+  "city": "上海",
+  "coords": [31.239, 121.504],
+  "solar": {
+    "date": "2026-10-28",
+    "weekday": "周三",
+    "weekday_en": "WED",
+    "day_of_year": 301,
+    "year": 2026
+  },
+  "lunar": {
+    "year_ganzhi": "丙午",
+    "month_day": "九月十九",
+    "display": "丙午年 · 九月十九",
+    "solar_term_note": "霜降后 5 天"
+  },
+  "weather": {
+    "condition": "晴",
+    "temp_c": 21,
+    "feels_like_c": 18,
+    "high_c": 21,
+    "low_c": 14,
+    "humidity_pct": 43,
+    "wind": "东风 3 级",
+    "uv_index": 2,
+    "pressure_hpa": 1023,
+    "visibility_km": 10,
+    "cloud_cover_pct": 2
+  },
+  "astronomy": {
+    "sunrise": "06:06",
+    "sunset": "17:09",
+    "daylight": "11h03m",
+    "moon_phase": "亏凸月",
+    "moonrise": "18:29",
+    "moonset": "08:18"
+  },
+  "placeholders": {
+    "steps": 8432,
+    "steps_goal": 12000,
+    "stand": 9,
+    "stand_goal": 12,
+    "battery_pct": 76,
+    "note": "步数、电量、站立为示例值，真机由手环/工具动态提供"
+  },
+  "sources": [
+    "https://wttr.in/Shanghai?format=j1",
+    "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2026c.txt"
+  ]
+}

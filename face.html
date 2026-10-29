@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Mi Band 10 Pro Face</title>
+<style>
+  :root{
+    --bg:#04070a;
+    --accent:#4fe3c1;
+    --accent-soft:#6fd8c3;
+    --text:#eaf4f4;
+    --muted:#6f8489;
+    --sub:#9fb3b6;
+    --line:rgba(94,234,212,.14);
+    --sun:#ffc46b;
+    --moon:#a8c7fa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:336px;height:480px;overflow:hidden;background:var(--bg)}
+  body{
+    font-family:"PingFang SC","Helvetica Neue",sans-serif;
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    font-variant-numeric:tabular-nums;
+  }
+  .screen{
+    position:relative;width:336px;height:480px;overflow:hidden;
+    background:
+      radial-gradient(150% 62% at 50% -10%, rgba(42,130,118,.34), transparent 62%),
+      radial-gradient(70% 34% at 104% 30%, rgba(255,196,107,.055), transparent 70%),
+      linear-gradient(180deg,#081113 0%,#050a0c 46%,#04070a 100%);
+  }
+  .grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(120,200,190,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,200,190,.04) 1px, transparent 1px);
+    background-size:12px 12px;
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.9), transparent 82%);
+    opacity:.45;
+  }
+  .ring{position:absolute;border:1px solid rgba(94,234,212,.07);border-radius:50%}
+  .ring.a{width:300px;height:300px;right:-118px;top:-128px}
+  .ring.b{width:190px;height:190px;right:-62px;top:-74px;border-color:rgba(94,234,212,.05)}
+  .vignette{
+    position:absolute;inset:0;
+    background:radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.45) 100%);
+  }
+
+  .card{
+    position:absolute;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:linear-gradient(180deg, rgba(17,28,31,.9), rgba(8,13,15,.92));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.045), 0 8px 22px rgba(0,0,0,.4);
+  }
+  .card::before{
+    content:"";position:absolute;left:14px;top:-1px;width:26px;height:1px;
+    background:linear-gradient(90deg, var(--accent), transparent);
+    opacity:.65;
+  }
+
+  /* ---------- top ---------- */
+  .battery{position:absolute;left:16px;top:17px;display:flex;align-items:center;gap:7px}
+  .battery .num{font-family:"Avenir Next Condensed","Helvetica Neue";font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--sub)}
+  .lunar{
+    position:absolute;right:16px;top:14px;
+    font-size:11.5px;line-height:16px;letter-spacing:.05em;color:var(--accent-soft);
+    display:flex;align-items:center;gap:6px;
+  }
+  .lunar .dot{width:3px;height:3px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent)}
+
+  /* ---------- time ---------- */
+  .time{
+    position:absolute;left:14px;top:34px;
+    font-family:"Avenir Next Condensed","Helvetica Neue";
+    font-size:94px;line-height:92px;font-weight:700;letter-spacing:-.015em;
+    background:linear-gradient(180deg,#ffffff 30%,#c9e6e0 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .wd{position:absolute;right:16px;top:54px;text-align:right}
+  .wd .en{font-family:"Avenir Next Condensed","Helvetica Neue";font-size:9px;font-weight:600;letter-spacing:.28em;color:var(--muted);line-height:10px}
+  .wd .cn{font-size:21px;font-weight:500;line-height:26px;color:var(--text);margin-top:4px}
+  .date{position:absolute;left:16px;top:134px;font-size:14px;line-height:20px;color:var(--text)}
+  .date b{font-weight:600;letter-spacing:.01em}
+  .date .yr{font-family:"Avenir Next Condensed","Helvetica Neue";font-size:10px;font-weight:500;letter-spacing:.08em;color:var(--muted);margin-left:6px}
+  .date .doy{position:absolute;left:246px;top:4px;width:58px;text-align:right;font-size:8.5px;letter-spacing:.08em;color:var(--muted)}
+
+  /* ---------- weather ---------- */
+  .weather{left:16px;top:166px;width:304px;height:84px}
+  .wicon{position:absolute;left:20px;top:22px;width:42px;height:42px}
+  .temp{
+    position:absolute;left:68px;top:4px;
+    font-family:"Avenir Next Condensed","Helvetica Neue";
+    font-size:47px;line-height:54px;font-weight:600;color:var(--text);letter-spacing:-.01em;
+  }
+  .temp .deg{font-size:26px;font-weight:500;vertical-align:top;position:relative;top:1px;margin-left:1px;color:var(--accent-soft)}
+  .cond{position:absolute;left:70px;top:60px;font-size:11px;line-height:14px;color:var(--sub);letter-spacing:.02em}
+  .wdiv{position:absolute;left:186px;top:17px;width:1px;height:50px;background:linear-gradient(180deg,transparent,rgba(94,234,212,.22),transparent)}
+  .wmeta{position:absolute;right:14px;top:23px;text-align:right;line-height:17px}
+  .wmeta .l1{font-size:10px;letter-spacing:.03em;color:#cfe2e0}
+  .wmeta .l2{font-size:9px;letter-spacing:.04em;color:var(--muted);margin-top:1px}
+
+  /* ---------- sun ---------- */
+  .sun{left:16px;top:262px;width:304px;height:86px}
+  .shead{position:absolute;left:14px;top:11px;right:14px;display:flex;justify-content:space-between;align-items:baseline}
+  .shead .t{font-size:8.5px;letter-spacing:.16em;color:var(--muted)}
+  .shead .v{font-family:"Avenir Next Condensed","Helvetica Neue";font-size:9.5px;letter-spacing:.08em;color:var(--accent-soft)}
+  .arc{position:absolute;left:14px;top:26px;width:276px;height:44px;overflow:visible}
+  .stimes{position:absolute;left:14px;right:14px;top:66px;display:flex;justify-content:space-between;align-items:center}
+  .stimes .g{display:flex;align-items:center;gap:5px;font-family:"Avenir Next Condensed","Helvetica Neue";font-size:11.5px;font-weight:600;letter-spacing:.06em;color:#d7e8e5}
+  .stimes .g svg{width:9px;height:9px}
+  .stimes .up{color:var(--sun)}
+  .stimes .down{color:var(--moon)}
+
+  /* ---------- steps ---------- */
+  .steps{left:16px;top:358px;width:188px;height:92px}
+  .steps .lab{position:absolute;left:14px;top:11px;font-size:8.5px;letter-spacing:.12em;color:var(--muted)}
+  .steps .num{
+    position:absolute;left:13px;top:17px;
+    font-family:"Avenir Next Condensed","Helvetica Neue";
+    font-size:40px;line-height:46px;font-weight:600;letter-spacing:-.005em;color:var(--text);
+  }
+  .steps .unit{font-size:9px;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-left:4px}
+  .bar{position:absolute;left:14px;top:68px;width:160px;height:4px;border-radius:2px;background:rgba(94,234,212,.13);overflow:hidden}
+  .bar i{display:block;height:100%;width:70%;border-radius:2px;background:linear-gradient(90deg,#2fae95,var(--accent));box-shadow:0 0 8px rgba(79,227,193,.45)}
+  .goal{position:absolute;left:14px;top:76px;font-size:8px;letter-spacing:.04em;color:var(--muted)}
+  .goal b{font-family:"Avenir Next Condensed","Helvetica Neue";font-weight:600;color:var(--sub);letter-spacing:.06em}
+  .pct{position:absolute;right:14px;top:75px;font-family:"Avenir Next Condensed","Helvetica Neue";font-size:9px;font-weight:600;letter-spacing:.05em;color:var(--accent-soft)}
+
+  /* ---------- stand ---------- */
+  .stand{left:216px;top:358px;width:104px;height:92px}
+  .stand .lab{position:absolute;left:14px;top:11px;font-size:8.5px;letter-spacing:.12em;color:var(--muted)}
+  .stand .num{
+    position:absolute;left:13px;top:18px;
+    font-family:"Avenir Next Condensed","Helvetica Neue";
+    font-size:31px;line-height:36px;font-weight:600;color:var(--text);
+  }
+  .stand .num span{font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.04em;margin-left:2px}
+  .dots{position:absolute;left:14px;top:64px;width:76px;display:grid;grid-template-columns:repeat(6,6px);gap:7px 8px}
+  .dots i{width:6px;height:6px;border-radius:2px;background:rgba(94,234,212,.16)}
+  .dots i.on{background:linear-gradient(180deg,#6fe9cf,#3fc4a9);box-shadow:0 0 5px rgba(79,227,193,.4)}
+
+  .foot{position:absolute;left:16px;right:16px;top:460px;display:flex;justify-content:space-between;font-size:8px;letter-spacing:.12em;color:rgba(111,132,137,.75)}
+
+  .guide{display:none}
+  body.mode-guide .guide{
+    display:block;position:absolute;z-index:20;
+    border:1px dashed rgba(79,227,193,.72);border-radius:3px;
+    background:rgba(79,227,193,.05);
+  }
+  body.mode-guide .guide span{
+    position:absolute;left:0;top:-13px;padding:1px 4px;border-radius:3px;
+    background:#0a1618;color:#7ff0d6;font-family:"Avenir Next Condensed",monospace;
+    font-size:8px;line-height:10px;letter-spacing:.1em;white-space:nowrap;
+  }
+
+  /* modes for export */
+  body.mode-bg .dyn, body.mode-clean .dyn{visibility:hidden}
+  body.mode-datebg .dyn{visibility:hidden}
+  body.mode-datebg .date, body.mode-datebg .wd{visibility:visible}
+  body.mode-datenowd .dyn{visibility:hidden}
+  body.mode-datenowd .date{visibility:visible}
+  body.mode-clean .staticval{visibility:hidden}
+  body.mode-bg .sunmark, body.mode-clean .sunmark{visibility:hidden}
+  body.mode-bg .battfill, body.mode-clean .battfill{opacity:.2}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="grid"></div>
+  <div class="ring a"></div>
+  <div class="ring b"></div>
+
+  <!-- top -->
+  <div class="battery">
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+      <rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="rgba(159,179,182,.55)"/>
+      <rect x="2.5" y="2.5" width="13.5" height="7" rx="1.6" fill="#4fe3c1" class="battfill"/>
+      <path d="M23.2 4v4c1-.3 1.5-1 1.5-2s-.5-1.7-1.5-2Z" fill="rgba(159,179,182,.55)"/>
+    </svg>
+    <span class="num dyn">76%</span>
+  </div>
+  <div class="lunar staticval"><span class="dot"></span>丙午年 · 九月十九</div>
+
+  <!-- time -->
+  <div class="time dyn">15:54</div>
+  <div class="wd dyn">
+    <div class="en">WED</div>
+    <div class="cn">周三</div>
+  </div>
+  <div class="date dyn">
+    <b>10月28日</b><span class="yr">2026</span>
+    <span class="doy">第 301 天</span>
+  </div>
+
+  <!-- weather -->
+  <div class="card weather">
+    <div class="wicon">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        <defs>
+          <radialGradient id="sunG" cx="50%" cy="42%" r="58%">
+            <stop offset="0%" stop-color="#ffe1a6"/>
+            <stop offset="55%" stop-color="#ffc46b"/>
+            <stop offset="100%" stop-color="#f0a03e"/>
+          </radialGradient>
+        </defs>
+        <circle cx="21" cy="21" r="9.2" fill="url(#sunG)"/>
+        <g stroke="#ffc46b" stroke-width="1.5" stroke-linecap="round" opacity=".85">
+          <path d="M21 2.6v3.4"/><path d="M21 36v3.4"/>
+          <path d="M2.6 21H6"/><path d="M36 21h3.4"/>
+          <path d="M8.4 8.4l2.4 2.4"/><path d="M31.2 31.2l2.4 2.4"/>
+          <path d="M33.6 8.4l-2.4 2.4"/><path d="M10.8 31.2l-2.4 2.4"/>
+        </g>
+        <circle cx="21" cy="21" r="15.5" stroke="rgba(255,196,107,.18)" stroke-dasharray="1 4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="temp dyn">21<span class="deg">°</span></div>
+    <div class="cond dyn">晴 · 体感 18°</div>
+    <div class="wdiv"></div>
+    <div class="wmeta staticval">
+      <div class="l1">最高 21° / 最低 14°</div>
+      <div class="l2">湿度 43% · 东风 3 级</div>
+    </div>
+  </div>
+
+  <!-- sun arc -->
+  <div class="card sun">
+    <div class="shead">
+      <span class="t">日出日落</span>
+      <span class="v staticval">日照 11h03m</span>
+    </div>
+    <svg class="arc" viewBox="0 0 276 44" fill="none">
+      <defs>
+        <linearGradient id="arcG" x1="4" y1="0" x2="272" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#ffc46b" stop-opacity=".55"/>
+          <stop offset=".5" stop-color="#ffc46b" stop-opacity=".22"/>
+          <stop offset="1" stop-color="#a8c7fa" stop-opacity=".45"/>
+        </linearGradient>
+        <filter id="sunGlow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="3.2" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <path d="M4 38H272" stroke="rgba(94,234,212,.16)" stroke-width=".8"/>
+      <path d="M4 38Q138 -30 272 38" stroke="url(#arcG)" stroke-width="1.2" stroke-dasharray="3 4"/>
+      <path d="M241.7 24.4V38" class="sunmark" stroke="rgba(255,196,107,.28)" stroke-width=".8" stroke-dasharray="1.5 2.5"/>
+      <circle cx="241.7" cy="24.4" r="3.3" fill="#ffd08a" filter="url(#sunGlow)" class="sunmark"/>
+    </svg>
+    <div class="stimes">
+      <div class="g"><svg viewBox="0 0 10 10" fill="none"><path d="M5 8V2M5 2L2.4 4.6M5 2l2.6 2.6" stroke="#ffc46b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="staticval">06:06</span></div>
+      <div class="g"><span class="staticval">17:09</span><svg viewBox="0 0 10 10" fill="none"><path d="M5 2v6M5 8l2.6-2.6M5 8L2.4 5.4" stroke="#a8c7fa" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+
+  <!-- steps -->
+  <div class="card steps">
+    <div class="lab">今日步数</div>
+    <div class="num dyn">8,432<span class="unit">步</span></div>
+    <div class="bar"><i class="dyn"></i></div>
+    <div class="goal">目标 <b>12,000</b></div>
+    <div class="pct dyn">70%</div>
+  </div>
+
+  <!-- stand -->
+  <div class="card stand">
+    <div class="lab">站立</div>
+    <div class="num staticval">9<span>/12</span></div>
+    <div class="dots staticval">
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+      <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>SHANGHAI · 浦东</span>
+    <span class="dyn">更新 15:54</span>
+  </div>
+
+  <div class="vignette"></div>
+
+  <div class="guide" style="left:14px;top:34px;width:232px;height:94px"><span>TIME 94px</span></div>
+  <div class="guide" style="left:266px;top:52px;width:54px;height:44px"><span>星期</span></div>
+  <div class="guide" style="left:16px;top:132px;width:200px;height:22px"><span>日期</span></div>
+  <div class="guide" style="left:47px;top:17px;width:44px;height:14px"><span>电量</span></div>
+  <div class="guide" style="left:84px;top:170px;width:92px;height:60px"><span>气温</span></div>
+  <div class="guide" style="left:86px;top:225px;width:92px;height:15px"><span>天气</span></div>
+  <div class="guide" style="left:29px;top:375px;width:140px;height:46px"><span>步数</span></div>
+</div>
+<script>
+  const mode = new URLSearchParams(location.search).get('mode');
+  if (mode) document.body.classList.add('mode-' + mode);
+  if (new URLSearchParams(location.search).has('nogrid')) {
+    document.querySelector('.grid').style.display = 'none';
+  }
+</script>
+</body>
+</html>

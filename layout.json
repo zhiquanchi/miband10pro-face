@@ -1,0 +1,68 @@
+{
+  "device": "Xiaomi Smart Band 10 Pro",
+  "screen": { "width": 336, "height": 480, "scale": 3 },
+  "style": "dark-data-dashboard",
+  "palette": {
+    "background": "#04070A",
+    "panel": "linear-gradient(180deg, rgba(17,28,31,.90), rgba(8,13,15,.92))",
+    "border": "rgba(94,234,212,.14)",
+    "accent": "#4FE3C1",
+    "accentSoft": "#6FD8C3",
+    "text": "#EAF4F4",
+    "muted": "#6F8489",
+    "sub": "#9FB3B6",
+    "sun": "#FFC46B",
+    "moon": "#A8C7FA"
+  },
+  "fonts": {
+    "numbers": "\"Avenir Next Condensed\", \"DIN Condensed\", \"Helvetica Neue\"",
+    "chinese": "\"PingFang SC\", \"Noto Sans SC\", sans-serif"
+  },
+  "cards": [
+    { "name": "weather", "x": 16, "y": 166, "w": 304, "h": 84, "radius": 14 },
+    { "name": "sun", "x": 16, "y": 262, "w": 304, "h": 86, "radius": 14 },
+    { "name": "steps", "x": 16, "y": 358, "w": 188, "h": 92, "radius": 14 },
+    { "name": "stand", "x": 216, "y": 358, "w": 104, "h": 92, "radius": 14 }
+  ],
+  "elements": [
+    { "id": "battery_icon", "type": "image", "dynamic": false, "x": 16, "y": 17, "w": 25, "h": 12, "asset": "assets/battery-shell@3x.png" },
+    { "id": "battery_value", "type": "text", "dynamic": true, "binding": "battery", "x": 47, "y": 18, "w": 40, "h": 14, "sample": "76%", "font": "numbers", "size": 11, "weight": 600, "color": "#9FB3B6", "align": "left" },
+
+    { "id": "lunar", "type": "text", "dynamic": false, "x": 180, "y": 14, "w": 140, "h": 16, "sample": "丙午年 · 九月十九", "font": "chinese", "size": 11.5, "color": "#6FD8C3", "align": "right", "note": "静态烘底，换日需重生成" },
+
+    { "id": "time", "type": "text", "dynamic": true, "binding": "time", "x": 14, "y": 34, "w": 232, "h": 94, "sample": "15:54", "font": "numbers", "size": 94, "weight": 700, "color": "linear-gradient(180deg,#FFFFFF 30%,#C9E6E0 100%)", "align": "left" },
+    { "id": "weekday_en", "type": "text", "dynamic": true, "binding": "weekday_en", "x": 266, "y": 54, "w": 54, "h": 10, "sample": "WED", "font": "numbers", "size": 9, "weight": 600, "tracking": "0.28em", "color": "#6F8489", "align": "right" },
+    { "id": "weekday_cn", "type": "text", "dynamic": true, "binding": "weekday_cn", "x": 266, "y": 68, "w": 54, "h": 26, "sample": "周三", "font": "chinese", "size": 21, "color": "#EAF4F4", "align": "right" },
+    { "id": "solar_date", "type": "text", "dynamic": true, "binding": "date", "x": 16, "y": 134, "w": 110, "h": 20, "sample": "10月28日", "font": "chinese", "size": 14, "weight": 600, "color": "#EAF4F4", "align": "left" },
+    { "id": "solar_year", "type": "text", "dynamic": true, "binding": "year", "x": 80, "y": 138, "w": 40, "h": 12, "sample": "2026", "font": "numbers", "size": 10, "color": "#6F8489", "align": "left" },
+    { "id": "day_of_year", "type": "text", "dynamic": true, "binding": "day_of_year", "x": 262, "y": 138, "w": 58, "h": 12, "sample": "第 301 天", "font": "chinese", "size": 8.5, "color": "#6F8489", "align": "right" },
+
+    { "id": "weather_icon", "type": "image", "dynamic": true, "binding": "weather_icon", "x": 36, "y": 188, "w": 42, "h": 42, "asset": "assets/weather-sun@3x.png" },
+    { "id": "weather_temp", "type": "text", "dynamic": true, "binding": "temperature", "x": 84, "y": 170, "w": 92, "h": 60, "sample": "21°", "font": "numbers", "size": 47, "weight": 600, "color": "#EAF4F4", "align": "left", "note": "度数符号 26px，#6FD8C3" },
+    { "id": "weather_cond", "type": "text", "dynamic": true, "binding": "condition", "x": 86, "y": 226, "w": 92, "h": 15, "sample": "晴 · 体感 18°", "font": "chinese", "size": 11, "color": "#9FB3B6", "align": "left" },
+    { "id": "weather_hl", "type": "text", "dynamic": false, "x": 186, "y": 189, "w": 120, "h": 17, "sample": "最高 21° / 最低 14°", "font": "chinese", "size": 10, "color": "#CFE2E0", "align": "right" },
+    { "id": "weather_sub", "type": "text", "dynamic": false, "x": 186, "y": 207, "w": 120, "h": 12, "sample": "湿度 43% · 东风 3 级", "font": "chinese", "size": 9, "color": "#6F8489", "align": "right" },
+    { "id": "weather_divider", "type": "rect", "dynamic": false, "x": 202, "y": 183, "w": 1, "h": 50, "color": "rgba(94,234,212,.22)" },
+
+    { "id": "sun_title", "type": "text", "dynamic": false, "x": 30, "y": 273, "w": 60, "h": 12, "sample": "日出日落", "font": "chinese", "size": 8.5, "tracking": "0.16em", "color": "#6F8489", "align": "left" },
+    { "id": "daylight", "type": "text", "dynamic": false, "x": 220, "y": 272, "w": 86, "h": 13, "sample": "日照 11h03m", "font": "numbers+chinese", "size": 9.5, "color": "#6FD8C3", "align": "right" },
+    { "id": "sun_arc", "type": "image", "dynamic": false, "x": 30, "y": 288, "w": 276, "h": 44, "note": "弧线+地平线已烘在底图中，也可用 assets 重建" },
+    { "id": "sun_marker", "type": "image", "dynamic": false, "x": 264, "y": 304, "w": 16, "h": 16, "asset": "assets/sun-dot@3x.png", "note": "示例位置对应 15:54，实际当前位置需按时间换算或省略" },
+    { "id": "sunrise_time", "type": "text", "dynamic": false, "x": 44, "y": 328, "w": 40, "h": 14, "sample": "06:06", "font": "numbers", "size": 11.5, "weight": 600, "tracking": "0.06em", "color": "#D7E8E5", "align": "left" },
+    { "id": "sunset_time", "type": "text", "dynamic": false, "x": 252, "y": 328, "w": 40, "h": 14, "sample": "17:09", "font": "numbers", "size": 11.5, "weight": 600, "tracking": "0.06em", "color": "#D7E8E5", "align": "right" },
+
+    { "id": "steps_label", "type": "text", "dynamic": false, "x": 30, "y": 369, "w": 70, "h": 10, "sample": "今日步数", "font": "chinese", "size": 8.5, "tracking": "0.12em", "color": "#6F8489", "align": "left" },
+    { "id": "steps_value", "type": "text", "dynamic": true, "binding": "steps", "x": 29, "y": 375, "w": 140, "h": 46, "sample": "8,432", "unit": "步", "font": "numbers", "size": 40, "weight": 600, "color": "#EAF4F4", "align": "left" },
+    { "id": "steps_track", "type": "rect", "dynamic": false, "x": 30, "y": 426, "w": 160, "h": 4, "radius": 2, "color": "rgba(94,234,212,.13)" },
+    { "id": "steps_fill", "type": "rect", "dynamic": true, "x": 30, "y": 426, "w": 112, "h": 4, "radius": 2, "color": "linear-gradient(90deg,#2FAE95,#4FE3C1)", "note": "工具一般无进度元素，此处仅示意；底图导出时已留空" },
+    { "id": "goal", "type": "text", "dynamic": false, "x": 30, "y": 434, "w": 80, "h": 10, "sample": "目标 12,000", "font": "chinese", "size": 8, "color": "#6F8489", "align": "left" },
+    { "id": "steps_pct", "type": "text", "dynamic": true, "x": 160, "y": 433, "w": 30, "h": 12, "sample": "70%", "font": "numbers", "size": 9, "weight": 600, "color": "#6FD8C3", "align": "right" },
+
+    { "id": "stand_label", "type": "text", "dynamic": false, "x": 230, "y": 369, "w": 60, "h": 10, "sample": "站立", "font": "chinese", "size": 8.5, "tracking": "0.12em", "color": "#6F8489", "align": "left" },
+    { "id": "stand_value", "type": "text", "dynamic": false, "x": 229, "y": 376, "w": 76, "h": 36, "sample": "9/12", "font": "numbers", "size": 31, "weight": 600, "color": "#EAF4F4", "align": "left" },
+    { "id": "stand_dots", "type": "element", "dynamic": false, "x": 230, "y": 422, "w": 76, "h": 19, "note": "6×2 圆点，9 个点亮；工具无站立元素时保持静态" },
+
+    { "id": "footer_location", "type": "text", "dynamic": false, "x": 16, "y": 460, "w": 130, "h": 10, "sample": "SHANGHAI · 浦东", "font": "numbers+chinese", "size": 8, "tracking": "0.12em", "color": "rgba(111,132,137,.75)", "align": "left" },
+    { "id": "footer_update", "type": "text", "dynamic": true, "x": 240, "y": 460, "w": 80, "h": 10, "sample": "更新 15:54", "font": "chinese", "size": 8, "color": "rgba(111,132,137,.75)", "align": "right" }
+  ]
+}

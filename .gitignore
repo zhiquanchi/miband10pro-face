@@ -1,0 +1,26 @@
+# 第三方闭源工具与反编译产物：不随本仓库分发
+reference/
+windows-easyface/
+
+# 小米固件、原厂素材、打包产物
+*.zip
+*.zip.part[0-9][0][0-9]
+*.bin.img
+
+# 构建产物（macapp/build.sh 会重新生成）
+macapp/MiBandFaceStudio.app/
+
+# Python / macOS 噪声
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# 模拟器工作目录（若把 vendor/miband-qemu 放进来，固件与 userdata 绝不入库）
+vendor/
+userdata/
+.build-tci/
+.build-macos/
+.build-o1/
+*.journal
+*.ppm
